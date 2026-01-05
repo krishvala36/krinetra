@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { ParticleCard } from './MagicBento';
 import ShinyText from './ShinyText';
+import Stack from './Stack';
 
 const highlights: { title: string; description: string; icon: string }[] = [
   {
@@ -56,15 +57,41 @@ export default function AboutSection() {
             ))}
           </div>
 
-          {/* Image */}
-          <div className="relative w-full h-64 sm:h-80 md:h-full min-h-[260px] overflow-hidden rounded-2xl shadow-lg">
-            <Image
-              src="/img-4.jpg"
-              alt="Developer at work"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
+          {/* Image Stack */}
+          <div className="relative w-full h-64 sm:h-80 md:h-full min-h-65 overflow-hidden rounded-2xl shadow-lg">
+            <Stack
+              cards={[
+                <Image
+                  key="img-3"
+                  src="/img-3.png"
+                  alt="Developer at work 1"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />,
+                <Image
+                  key="img-2"
+                  src="/img-2.jpg"
+                  alt="Developer at work 2"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />,
+                <Image
+                  key="img-4"
+                  src="/img-4.jpg"
+                  alt="Developer at work 3"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              ]}
+              randomRotation={true}
+              sensitivity={150}
+              sendToBackOnClick={true}
+              autoplay={true}
+              autoplayDelay={4000}
+              pauseOnHover={true}
             />
           </div>
         </div>
@@ -76,7 +103,7 @@ export default function AboutSection() {
 function IconBadge({ type }: { type: string }) {
   return (
     <span
-      className="inline-flex p-[1px] rounded-xl"
+      className="inline-flex p-px rounded-xl"
       style={{
         backgroundImage: 'linear-gradient(135deg, #FFFFFF 0%, #F7B602 52%, rgba(255,255,255,0.08) 87%)',
       }}
