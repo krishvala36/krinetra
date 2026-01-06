@@ -1,39 +1,45 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ParticleCard } from './MagicBento';
 import ShinyText from './ShinyText';
+import ScrollStack from './ScrollStack';
 
 const services = [
   {
-    title: 'Product Strategy',
-    description: 'Discovery, roadmapping, KPIs, and measurable outcomes for launch and growth.',
-    chip: 'Business-first',
+    title: 'Web Development',
+    description:
+      'Custom web applications built with modern technologies like React, Next.js, and TypeScript for optimal performance.',
+    points: ['Responsive Design', 'Fast Loading', 'SEO Optimized'],
   },
   {
-    title: 'Web Experiences',
-    description: 'High-performance websites, landing pages, and dashboards built for conversion.',
-    chip: 'Web',
+    title: 'Backend Development',
+    description:
+      'Robust server-side solutions with scalable architecture, secure APIs, and efficient database management.',
+    points: ['Express.js', 'Mongo DB', 'Cloud integration'],
   },
   {
-    title: 'Mobile Apps',
-    description: 'iOS and Android apps with polished UI, offline readiness, and analytics baked in.',
-    chip: 'Mobile',
+    title: 'App Development',
+    description:
+      'Cross-platform mobile applications that deliver native-like experiences on both iOS and Android devices.',
+    points: ['React Native', 'Expo', 'Progressive Web Apps'],
   },
   {
-    title: 'Brand & Visual',
-    description: 'Identity systems, design systems, and marketing assets that stay consistent.',
-    chip: 'Branding',
+    title: 'E-commerce Solutions',
+    description:
+      'Complete online store development with secure payment integration, inventory management, and seamless checkout experience.',
+    points: ['Payment Gateway', 'Product Management', 'Order Tracking'],
   },
   {
-    title: 'Cloud & DevOps',
-    description: 'Scalable infra, CI/CD, observability, and cost optimization for reliable releases.',
-    chip: 'Cloud',
+    title: 'UI/UX Design',
+    description:
+      'Beautiful and intuitive user interfaces designed to engage users and enhance their experience with your product.',
+    points: ['User Research', 'Wireframing', 'Prototyping'],
   },
   {
-    title: 'SEO & Performance',
-    description: 'Technical SEO, Core Web Vitals, and speed optimization to keep users (and search) happy.',
-    chip: 'Optimization',
+    title: 'Maintenance & Support',
+    description:
+      'Ongoing technical support and maintenance to keep your applications running smoothly with regular updates and bug fixes.',
+    points: ['24/7 Support', 'Regular Updates', 'Bug Fixes'],
   },
 ];
 
@@ -80,38 +86,20 @@ export default function ServicesSection() {
           </div>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {services.map((service, index) => (
-            <ParticleCard
-              key={service.title}
-              className={`rounded-2xl border border-gray-200/70 bg-white/70 backdrop-blur-sm p-5 sm:p-6 shadow-sm transition-all duration-500 ${
-                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-              }`}
-              style={{ transitionDelay: `${index * 60}ms` }}
-              glowColor="195, 143, 47"
-              enableTilt={true}
-              clickEffect={true}
-              enableMagnetism={true}
-              particleCount={10}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <span className="px-3 py-1 rounded-full text-xs font-semibold" style={{ backgroundColor: 'rgba(195, 143, 47, 0.12)', color: '#C38F2F' }}>
-                  {service.chip}
-                </span>
-                <div className="h-9 w-9 rounded-full flex items-center justify-center text-sm font-bold text-gray-700" style={{ backgroundColor: 'rgba(0,0,0,0.05)' }}>
-                  {index + 1}
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-snug">{service.title}</h3>
-              <p className="text-gray-700 text-sm leading-relaxed mb-4">
-                {service.description}
-              </p>
-              <button className="text-sm font-semibold" style={{ color: '#164952' }}>
-                Learn more →
-              </button>
-            </ParticleCard>
-          ))}
+        {/* Animated Scroll Stack */}
+        <div className="mt-6">
+          <ScrollStack
+            cards={services.map((s) => ({
+              title: s.title,
+              subtitle: s.description,
+              // pass points through for rendering inside ScrollStack
+              // @ts-ignore
+              points: s.points || s.points,
+            }))}
+            cardHeight="56vh"
+            sectionHeightMultiplier={3}
+            className="pb-24"
+          />
         </div>
       </div>
     </section>

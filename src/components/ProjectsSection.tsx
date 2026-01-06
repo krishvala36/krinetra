@@ -17,28 +17,28 @@ export default function ProjectsSection() {
       id: 1,
       title: 'Critly',
       category: 'Mobile App',
-      image: '/projects/critly.png',
+      image: 'p-img-1.png',
       bgColor: 'bg-purple-600'
     },
     {
       id: 2,
       title: 'Tenato',
       category: 'Web Design',
-      image: '/projects/tenato.png',
+      image: 'p-img-2.png',
       bgColor: 'bg-lime-400'
     },
     {
       id: 3,
       title: 'Santa',
       category: 'Mobile App & Branding',
-      image: '/projects/santa.png',
+      image: 'p-img-3.png',
       bgColor: 'bg-blue-500'
     },
     {
       id: 4,
       title: 'Crint',
       category: 'Mobile App',
-      image: '/projects/crint.png',
+      image: 'p-img-4.jfif',
       bgColor: 'bg-orange-400'
     }
   ];

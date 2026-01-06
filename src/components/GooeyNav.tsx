@@ -263,7 +263,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
         <nav className="flex relative" style={{ transform: 'translate3d(0,0,0.01px)' }}>
           <ul
             ref={navRef}
-            className="flex gap-6 list-none p-0 px-4 m-0 relative z-[3]"
+            className="flex gap-6 list-none p-0 px-4 m-0 relative z-3"
           >
             {items.map((item, index) => (
               <li
