@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { ParticleCard } from './MagicBento';
 import ShinyText from './ShinyText';
+import { StickyScroll } from './ui/sticky-scroll-reveal';
 
 export default function ProjectsSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -14,33 +14,65 @@ export default function ProjectsSection() {
 
   const projects = [
     {
-      id: 1,
       title: 'Critly',
-      category: 'Mobile App',
-      image: 'p-img-1.png',
-      bgColor: 'bg-purple-600'
+      description: 'A modern mobile application designed to revolutionize user experience with cutting-edge features and intuitive design.',
+      content: (
+        <div className="flex h-full w-full items-center justify-center">
+          <Image
+            src="/p-img-1.png"
+            width={500}
+            height={500}
+            className="h-full w-full object-cover"
+            alt="Critly project"
+          />
+        </div>
+      ),
     },
     {
-      id: 2,
       title: 'Tenato',
-      category: 'Web Design',
-      image: 'p-img-2.png',
-      bgColor: 'bg-lime-400'
+      description: 'Elegant web design solution that combines aesthetics with functionality, delivering seamless user experiences across all devices.',
+      content: (
+        <div className="flex h-full w-full items-center justify-center">
+          <Image
+            src="/p-img-2.png"
+            width={500}
+            height={500}
+            className="h-full w-full object-cover"
+            alt="Tenato project"
+          />
+        </div>
+      ),
     },
     {
-      id: 3,
       title: 'Santa',
-      category: 'Mobile App & Branding',
-      image: 'p-img-3.png',
-      bgColor: 'bg-blue-500'
+      description: 'Comprehensive mobile app and branding solution that brings your vision to life with stunning visuals and powerful features.',
+      content: (
+        <div className="flex h-full w-full items-center justify-center">
+          <Image
+            src="/p-img-3.png"
+            width={500}
+            height={500}
+            className="h-full w-full object-cover"
+            alt="Santa project"
+          />
+        </div>
+      ),
     },
     {
-      id: 4,
       title: 'Crint',
-      category: 'Mobile App',
-      image: 'p-img-4.jfif',
-      bgColor: 'bg-orange-400'
-    }
+      description: 'Innovative mobile application that pushes boundaries with advanced technology and user-centric design principles.',
+      content: (
+        <div className="flex h-full w-full items-center justify-center">
+          <Image
+            src="/p-img-4.png"
+            width={500}
+            height={500}
+            className="h-full w-full object-cover"
+            alt="Crint project"
+          />
+        </div>
+      ),
+    },
   ];
 
   return (
@@ -68,44 +100,11 @@ export default function ProjectsSection() {
           </button>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <div
-              key={project.id}
-              className={`transform transition-all duration-1000 delay-${index * 100} ${
-                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-              }`}
-            >
-              {/* Project Card */}
-              <ParticleCard
-                className="group cursor-pointer"
-                glowColor="132, 0, 255"
-                enableTilt={true}
-                clickEffect={true}
-                enableMagnetism={true}
-                particleCount={12}
-              >
-                {/* Image Container */}
-                <div className={`${project.bgColor} rounded-3xl overflow-hidden aspect-[4/3] flex items-center justify-center p-8 mb-4 transition-transform duration-300 group-hover:scale-[1.02]`}>
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    {/* Placeholder for project image */}
-                    <div className="text-white text-6xl font-bold opacity-20">
-                      {project.title}
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Project Info */}
-                <div className="space-y-1">
-                  <h3 className="text-2xl font-bold text-gray-900 group-hover:text-orange-400 transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600">{project.category}</p>
-                </div>
-              </ParticleCard>
-            </div>
-          ))}
+        {/* Sticky Scroll Projects */}
+        <div className={`transform transition-all duration-1000 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}>
+          <StickyScroll content={projects} contentClassName="h-96 w-96" />
         </div>
       </div>
     </section>

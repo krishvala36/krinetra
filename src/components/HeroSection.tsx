@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Particles from './Particles';
 import SplitText from './SplitText';
+import LogoLoop from './LogoLoop';
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -31,6 +32,26 @@ export default function HeroSection() {
           className="opacity-60"
         />
       </div>
+
+      {/* Hero-only background logo */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 700,
+          height: 700,
+          backgroundImage: "url('/krinetra-logo-2.png')",
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          opacity: 0.6,
+          pointerEvents: 'none',
+          zIndex: 0,
+        }}
+      />
 
       {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
@@ -83,6 +104,26 @@ export default function HeroSection() {
               >
                 info.krinetra@gmail.com
               </a>
+              {/* Logo loop placed below email */}
+              <div className="pt-10" style={{ maxWidth: '214px' }}>
+                <LogoLoop
+                  logos={[
+                    { src: '/figma.png', alt: 'figma' },
+                    { src: '/python.png', alt: 'python' },
+                    { src: '/React.webp', alt: 'React' },
+                    { src: '/Untitled design (1).png', alt: 'Tailwind CSS' },
+                    { src: '/vercel.webp', alt: 'Vercel' },
+                    { src: '/javascript.webp', alt: 'JavaScript' },
+                    { src: '/github.webp', alt: 'GitHub' }
+                  ]}
+                  speed={80}
+                  logoHeight={50}
+                  gap={30}
+                  pauseOnHover={true}
+                  fadeOut={true}
+                  fadeOutColor="#ffffff"
+                />
+              </div>
             </div>
 
             {/* Decorative Line */}

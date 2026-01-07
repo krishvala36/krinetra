@@ -149,7 +149,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
             {/* Right stacked cards */}
             <div className="relative w-1/2 h-full flex items-center">
-              <div ref={cardsContainerRef} className="relative w-full max-w-2xl mx-auto flex-shrink-0" style={{ height: cardHeight }}>
+              <div ref={cardsContainerRef} className="relative w-full max-w-2xl mx-auto shrink-0" style={{ height: cardHeight }}>
                 {cards.map((card, index) => {
                   const cardTransform = getCardTransform(index);
                   return (
@@ -197,7 +197,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
                             )}
 
                             <div className="text-right">
-                              <button className="px-4 py-2 rounded-md bg-gradient-to-b from-blue-500 to-blue-700 text-white font-semibold">
+                              <button className="px-4 py-2 rounded-md bg-linear-to-b from-blue-500 to-blue-700 text-white font-semibold">
                                 Get Service
                               </button>
                             </div>
