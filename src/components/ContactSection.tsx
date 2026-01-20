@@ -11,11 +11,44 @@ export default function ContactSection() {
     email: '',
     message: '',
   });
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    setErrorMessage('');
+    setSuccessMessage('');
+
+    // Validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setErrorMessage('Please Fill Details');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Create mailto link
+      const subject = `New Contact Form Submission from ${formData.name}`;
+      const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
+      const mailtoLink = `mailto:info.krinetra@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      
+      // Open email client
+      window.location.href = mailtoLink;
+      
+      setSuccessMessage('Opening your email client...');
+      
+      // Reset form after 2 seconds
+      setTimeout(() => {
+        setFormData({ name: '', email: '', message: '' });
+        setSuccessMessage('');
+      }, 2000);
+    } catch (error) {
+      setErrorMessage('Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -23,10 +56,12 @@ export default function ContactSection() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    // Clear error when user starts typing
+    if (errorMessage) setErrorMessage('');
   };
 
   return (
-    <section id="contact" className="relative py-16 sm:py-20">
+    <section id="contact" className="relative py-16 sm:py-20 bg-orange-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -133,6 +168,20 @@ export default function ContactSection() {
             spotlightColor="rgba(195, 143, 47, 0.25)"
           >
             <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+              {/* Error Message */}
+              {errorMessage && (
+                <div className="bg-red-500/20 border border-red-500 text-red-200 px-4 py-3 rounded-lg">
+                  {errorMessage}
+                </div>
+              )}
+
+              {/* Success Message */}
+              {successMessage && (
+                <div className="bg-green-500/20 border border-green-500 text-green-200 px-4 py-3 rounded-lg">
+                  {successMessage}
+                </div>
+              )}
+
               {/* Name Field */}
               <div>
                 <label htmlFor="name" className="block text-lg font-medium text-white mb-3">
@@ -146,7 +195,6 @@ export default function ContactSection() {
                   onChange={handleChange}
                   placeholder="Enter Your Name"
                   className="w-full px-4 py-3 rounded-lg bg-gray-800/50 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:border-gray-500 transition-colors"
-                  required
                 />
               </div>
 
@@ -163,7 +211,6 @@ export default function ContactSection() {
                   onChange={handleChange}
                   placeholder="your.email@example.com"
                   className="w-full px-4 py-3 rounded-lg bg-gray-800/50 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:border-gray-500 transition-colors"
-                  required
                 />
               </div>
 
@@ -180,21 +227,21 @@ export default function ContactSection() {
                   placeholder="Your Message..."
                   rows={6}
                   className="w-full px-4 py-3 rounded-lg bg-gray-800/50 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:border-gray-500 resize-none transition-colors"
-                  required
                 />
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-3.5 px-6 rounded-lg font-semibold text-white flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg"
+                disabled={isSubmitting}
+                className="w-full py-3.5 px-6 rounded-lg font-semibold text-white flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ backgroundColor: '#B8860B80'}}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="m22 2-7 20-4-9-9-4Z" />
                   <path d="M22 2 11 13" />
                 </svg>
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </SpotlightCard>

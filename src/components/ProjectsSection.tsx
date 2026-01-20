@@ -14,60 +14,60 @@ export default function ProjectsSection() {
 
   const projects = [
     {
-      title: 'Critly',
-      description: 'A modern mobile application designed to revolutionize user experience with cutting-edge features and intuitive design.',
+      title: 'Abhigyan Gurukul website & app',
+      description: 'A comprehensive educational platform featuring responsive web design and mobile app development. We delivered end-to-end solutions including UI/UX design, backend development, and seamless integration across all devices, creating an intuitive learning experience for students and educators.',
       content: (
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex h-full w-full items-center justify-center rounded-md overflow-hidden">
           <Image
             src="/p-img-1.png"
             width={500}
             height={500}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
             alt="Critly project"
           />
         </div>
       ),
     },
     {
-      title: 'Tenato',
-      description: 'Elegant web design solution that combines aesthetics with functionality, delivering seamless user experiences across all devices.',
+      title: 'Muktivatm',
+      description: 'An elegant insurance platform combining stunning web design with robust functionality. Our services included web development and simplifies insurance buying across all devices',
       content: (
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex h-full w-full items-center justify-center rounded-md overflow-hidden">
           <Image
             src="/p-img-2.png"
             width={500}
             height={500}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
             alt="Tenato project"
           />
         </div>
       ),
     },
     {
-      title: 'Santa',
-      description: 'Comprehensive mobile app and branding solution that brings your vision to life with stunning visuals and powerful features.',
+      title: 'MAK Watches website', 
+      description: 'A premium e-commerce solution for luxury watches featuring sophisticated web design and branding. We provided complete e-commerce integration, and custom backend solutions to create an elegant online shopping experience that reflects the brand\'s prestige.',
       content: (
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex h-full w-full items-center justify-center rounded-md overflow-hidden">
           <Image
             src="/p-img-3.png"
             width={500}
             height={500}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
             alt="Santa project"
           />
         </div>
       ),
     },
     {
-      title: 'Crint',
-      description: 'Innovative mobile application that pushes boundaries with advanced technology and user-centric design principles.',
+      title: 'Digital Maintenance & Support',
+      description: 'Ongoing technical excellence through our comprehensive maintenance and support services. We provide continuous monitoring, updates, bug fixes, performance optimization, and 24/7 support to ensure your web and mobile applications run smoothly and stay up-to-date with the latest technologies.',
       content: (
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex h-full w-full items-center justify-center rounded-md overflow-hidden">
           <Image
             src="/p-img-4.png"
             width={500}
             height={500}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
             alt="Crint project"
           />
         </div>

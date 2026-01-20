@@ -75,19 +75,21 @@ export default function Navbar() {
           </div>
 
           {/* CTA Button */}
-          <button 
-            className="text-white px-6 py-2.5 transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95"
-            style={{
-              fontSize: '18px',
-              fontWeight: '600',
-              backgroundImage: 'linear-gradient(135deg, #5E94FF, #164952)',
-              border: '1px solid #164952',
-              borderRadius: '12px',
-              boxShadow: '0 8px 20px rgba(0,0,0,0.35)',
-            }}
-          >
-            Get Now
-          </button>
+          <a href="#contact">
+            <button 
+              className="text-white px-6 py-2.5 transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95"
+              style={{
+                fontSize: '18px',
+                fontWeight: '600',
+                backgroundImage: 'linear-gradient(135deg, #5E94FF, #164952)',
+                border: '1px solid #164952',
+                borderRadius: '12px',
+                boxShadow: '0 8px 20px rgba(0,0,0,0.35)',
+              }}
+            >
+              Get Now
+            </button>
+          </a>
         </div>
       </div>
     </nav>

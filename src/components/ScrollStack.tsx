@@ -50,7 +50,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     transition: `transform ${animationDuration} cubic-bezier(0.19, 1, 0.22, 1), opacity ${animationDuration} cubic-bezier(0.19, 1, 0.22, 1)`,
     willChange: "transform, opacity",
     overflow: "hidden",
-    backgroundColor: "rgba(255,255,255,0.98)",
+    backgroundColor: "rgba(240, 249, 255, 0.98)",
   };
 
   // No body scroll-locking: drive the stack with normal window scroll.
@@ -117,18 +117,19 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
   const getCardTransform = (index: number) => {
     const isVisible = isIntersecting && activeCardIndex >= index;
-    const scale = 0.95 + (cardCount - index - 1) * 0.02;
-    let translateY = "120px";
+    const isActive = activeCardIndex === index;
+    const scale = 1;
+    let translateY = "80px";
 
     if (isVisible) {
-      translateY = `${80 - index * 28}px`;
+      translateY = "0px";
     }
 
     return {
       transform: `translateY(${translateY}) scale(${scale})`,
-      opacity: isVisible ? (index === 0 ? 0.95 : 1) : 0,
+      opacity: isActive ? 1 : 0,
       zIndex: 100 + index * 10,
-      pointerEvents: isVisible ? "auto" : "none",
+      pointerEvents: isActive ? "auto" : "none",
     } as React.CSSProperties;
   };
 
@@ -137,18 +138,18 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       <style>{`/* scrollbar hidden removed to allow normal page scroll */`}</style>
 
       <div ref={sectionRef} className={`relative ${className}`} style={{ height: `${sectionHeightMultiplier * 100}vh` }}>
-        <div className={`sticky top-0 w-full h-screen flex items-center justify-center overflow-hidden ${backgroundColor}`}>
-          <div className="container px-6 lg:px-8 mx-auto h-full flex flex-row items-start justify-center gap-6">
+        <div className={`sticky top-0.5 w-full h-screen flex items-center justify-center overflow-hidden ${backgroundColor}`}>
+          <div className="container px-6 lg:px-8 mx-auto h-full flex flex-row items-center justify-center gap-6">
 
             {/* Left sticky image */}
-            <div className="sticky top-[20vh] left-0 w-1/2 h-[70vh] flex items-center justify-center">
+            <div className="w-1/2 h-[70vh] flex items-center justify-center">
               <div className="w-full h-full rounded-3xl overflow-hidden shadow-lg">
                 <img src="/s-img.png" alt="Decor" className="w-full h-full object-cover" />
               </div>
             </div>
 
             {/* Right stacked cards */}
-            <div className="relative w-1/2 h-full flex items-center">
+            <div className="relative w-1/2 h-[70vh] flex items-center">
               <div ref={cardsContainerRef} className="relative w-full max-w-2xl mx-auto shrink-0" style={{ height: cardHeight }}>
                 {cards.map((card, index) => {
                   const cardTransform = getCardTransform(index);
@@ -171,7 +172,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
                       {card.badge && (
                         <div className="absolute top-4 right-4 z-20">
-                          <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-white/90 border border-gray-100 text-gray-800 shadow-sm">
+                          <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-blue-50/90 border border-blue-100 text-gray-800 shadow-sm">
                             <span className="text-sm font-medium">{card.badge}</span>
                           </div>
                         </div>
@@ -197,9 +198,11 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
                             )}
 
                             <div className="text-right">
-                              <button className="px-4 py-2 rounded-md bg-linear-to-b from-blue-500 to-blue-700 text-white font-semibold">
-                                Get Service
-                              </button>
+                              <a href="#contact">
+                                <button className="px-4 py-2 rounded-md bg-linear-to-b from-blue-500 to-blue-700 text-white font-semibold">
+                                  Get Service
+                                </button>
+                              </a>
                             </div>
                           </div>
                         )}

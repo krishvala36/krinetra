@@ -195,8 +195,8 @@ export default function Stack({
               className="rounded-2xl overflow-hidden w-full h-full"
               onClick={() => shouldEnableClick && sendToBack(card.id)}
               animate={{
-                rotateZ: (stack.length - index - 1) * 4 + randomRotate,
-                scale: 1 + index * 0.06 - stack.length * 0.06,
+                rotateZ: (stack.length - index - 1) * 1.5 + randomRotate * 0.3,
+                scale: 1 + index * 0.02 - stack.length * 0.02,
                 transformOrigin: '90% 90%'
               }}
               initial={false}
@@ -204,6 +204,9 @@ export default function Stack({
                 type: 'spring',
                 stiffness: animationConfig.stiffness,
                 damping: animationConfig.damping
+              }}
+              style={{
+                opacity: index === stack.length - 1 ? 1 : 0.1 + (index / stack.length) * 0.3
               }}
             >
               {card.content}

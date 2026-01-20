@@ -51,7 +51,7 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <section id="services" className="relative py-16 sm:py-20">
+    <section id="services" className="relative py-16 sm:py-20 bg-orange-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div
@@ -77,12 +77,14 @@ export default function ServicesSection() {
               <span className="h-2 w-2 rounded-full mr-2" style={{ backgroundColor: '#15c47e' }}></span>
               Mobile-first, fast, and reliable
             </div>
-            <button
-              className="px-5 py-2 rounded-lg text-white text-sm font-semibold shadow-lg transition-transform duration-300 hover:scale-[1.02] active:scale-95"
-              style={{ backgroundImage: 'linear-gradient(135deg, #5E94FF, #164952)' }}
-            >
-              Book a call
-            </button>
+            <a href="tel:+919773109035">
+              <button
+                className="px-5 py-2 rounded-lg text-white text-sm font-semibold shadow-lg transition-transform duration-300 hover:scale-[1.02] active:scale-95"
+                style={{ backgroundImage: 'linear-gradient(135deg, #5E94FF, #164952)' }}
+              >
+                Book a call
+              </button>
+            </a>
           </div>
         </div>
 

@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Particles from './Particles';
 import SplitText from './SplitText';
 import LogoLoop from './LogoLoop';
+import BlurText from './BlurText';
+import TextType from './TextType';
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -62,48 +64,52 @@ export default function HeroSection() {
               isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'
             }`}
           >
-            {/* Main Headline with SplitText Animation */}
+            {/* Main Headline with BlurText Animation */}
             <div className="text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 leading-tight">
-              <SplitText
+              <BlurText
                 text="Websites &"
                 className="text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900"
-                tag="h1"
-                delay={50}
-                duration={0.8}
-                ease="power3.out"
-                splitType="chars"
-                from={{ opacity: 0, y: 50, rotateX: -90 }}
-                to={{ opacity: 1, y: 0, rotateX: 0 }}
+                delay={80}
+                animateBy="words"
+                direction="top"
                 threshold={0.1}
-                textAlign="left"
+                stepDuration={0.4}
               />
-              <br />
-              <SplitText
+              <BlurText
                 text="Branding"
                 className="text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-800"
-                tag="span"
-                delay={50}
-                duration={0.8}
-                ease="power3.out"
-                splitType="chars"
-                from={{ opacity: 0, y: 50, rotateX: -90 }}
-                to={{ opacity: 1, y: 0, rotateX: 0 }}
+                delay={80}
+                animateBy="words"
+                direction="top"
                 threshold={0.1}
-                textAlign="left"
+                stepDuration={0.4}
               />
             </div>
 
             {/* Contact Info */}
             <div className="space-y-2">
-              <p className="text-orange-400 font-semibold text-lg tracking-wide">
-                Let's Talk
-              </p>
-              <a
-                href="mailto:info.krinetra@gmail.com"
-                className="text-gray-700 hover:text-blue-600 transition-colors duration-300 text-lg"
-              >
-                info.krinetra@gmail.com
-              </a>
+              <TextType
+                text="Let's Talk"
+                as="p"
+                className="text-orange-400 font-semibold text-lg tracking-wide"
+                typingSpeed={100}
+                showCursor={false}
+                loop={false}
+                startOnVisible={true}
+              />
+              <div>
+                <TextType
+                  text="info.krinetra@gmail.com"
+                  as="a"
+                  href="mailto:info.krinetra@gmail.com"
+                  className="text-gray-700 hover:text-blue-600 transition-colors duration-300 text-lg block"
+                  typingSpeed={60}
+                  showCursor={false}
+                  loop={false}
+                  initialDelay={1500}
+                  startOnVisible={true}
+                />
+              </div>
               {/* Logo loop placed below email */}
               <div className="pt-10" style={{ maxWidth: '214px' }}>
                 <LogoLoop
@@ -140,9 +146,15 @@ export default function HeroSection() {
           >
             {/* Tagline */}
             <div className="space-y-4">
-              <p className="text-2xl lg:text-3xl font-semibold text-gray-800 leading-relaxed">
-                Powering Your Business Digitally and Driving Growth with Technology
-              </p>
+              <TextType
+                text="Powering Your Business Digitally and Driving Growth with Technology"
+                as="p"
+                className="text-2xl lg:text-3xl font-semibold text-yellow-700 leading-relaxed"
+                typingSpeed={40}
+                showCursor={false}
+                loop={false}
+                startOnVisible={true}
+              />
             </div>
 
             {/* Scroll Down Indicator */}
