@@ -98,17 +98,18 @@ export default function HeroSection() {
                 startOnVisible={true}
               />
               <div>
-                <TextType
-                  text="info.krinetra@gmail.com"
-                  as="a"
-                  href="mailto:info.krinetra@gmail.com"
-                  className="text-gray-700 hover:text-blue-600 transition-colors duration-300 text-lg block"
-                  typingSpeed={60}
-                  showCursor={false}
-                  loop={false}
-                  initialDelay={1500}
-                  startOnVisible={true}
-                />
+                <a href="mailto:info.krinetra@gmail.com" className="text-gray-700 hover:text-blue-600 transition-colors duration-300 text-lg block">
+                  <TextType
+                    text="info.krinetra@gmail.com"
+                    as="span"
+                    className="text-gray-700"
+                    typingSpeed={60}
+                    showCursor={false}
+                    loop={false}
+                    initialDelay={1500}
+                    startOnVisible={true}
+                  />
+                </a>
               </div>
               {/* Logo loop placed below email */}
               <div className="pt-10" style={{ maxWidth: '214px' }}>

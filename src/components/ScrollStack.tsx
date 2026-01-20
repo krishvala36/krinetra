@@ -183,7 +183,16 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
                           card.content
                         ) : (
                           <div className="max-w-md ml-auto text-right">
-                            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight mb-4">{card.title}</h3>
+                            <div className="flex items-center justify-end gap-3 mb-4">
+                              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">{card.title}</h3>
+                              {/* @ts-ignore */}
+                              {(card as any).icon && (
+                                <div className="shrink-0">
+                                  {/* @ts-ignore */}
+                                  {(card as any).icon}
+                                </div>
+                              )}
+                            </div>
                             {card.subtitle && <p className="text-lg text-gray-700 mb-4">{card.subtitle}</p>}
 
                             {/* If card has points array (from ServicesSection) render it */}

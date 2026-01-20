@@ -90,7 +90,7 @@ export default function AboutSection() {
               sensitivity={150}
               sendToBackOnClick={true}
               autoplay={true}
-              autoplayDelay={4000}
+              autoplayDelay={2000}
               pauseOnHover={true}
             />
           </div>

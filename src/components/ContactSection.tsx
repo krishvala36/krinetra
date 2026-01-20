@@ -29,21 +29,28 @@ export default function ContactSection() {
     setIsSubmitting(true);
 
     try {
-      // Create mailto link
-      const subject = `New Contact Form Submission from ${formData.name}`;
-      const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
-      const mailtoLink = `mailto:info.krinetra@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-      
-      // Open email client
-      window.location.href = mailtoLink;
-      
-      setSuccessMessage('Opening your email client...');
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setErrorMessage(data.error || 'Failed to send message. Please try again.');
+        return;
+      }
+
+      setSuccessMessage('Message sent successfully! We will get back to you soon.');
       
       // Reset form after 2 seconds
       setTimeout(() => {
         setFormData({ name: '', email: '', message: '' });
         setSuccessMessage('');
-      }, 2000);
+      }, 3000);
     } catch (error) {
       setErrorMessage('Failed to send message. Please try again.');
     } finally {
