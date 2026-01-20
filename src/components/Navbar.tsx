@@ -35,10 +35,19 @@ export default function Navbar() {
             backdropFilter: 'blur(9px)',
             WebkitBackdropFilter: 'blur(9px)',
             opacity: 1,
+            padding: '15px 20px',
           }}
         >
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
+          <Link 
+            href="/" 
+            className="flex items-center space-x-3 group no-underline"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.history.pushState({}, '', '/');
+            }}
+          >
             <div className="relative transition-transform duration-300 group-hover:scale-110" style={{ width: '45px', height: '45px' }}>
               <Image
                 src="/krinetra-logo.png"

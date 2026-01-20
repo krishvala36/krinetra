@@ -15,7 +15,8 @@ export const StickyScroll = ({
   }[];
   contentClassName?: string;
 }) => {
-  const [activeCard, setActiveCard] = React.useState(0);
+  const [activeCard, setActiveCard] = React.useState(-1);
+  const [animatingCard, setAnimatingCard] = useState<number | null>(null);
   const ref = useRef<any>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -35,7 +36,13 @@ export const StickyScroll = ({
       },
       0,
     );
-    setActiveCard(closestBreakpointIndex);
+    
+    // Only update if the card actually changed
+    if (closestBreakpointIndex !== activeCard) {
+      setActiveCard(closestBreakpointIndex);
+      // Trigger animation for the new active card
+      setAnimatingCard(closestBreakpointIndex);
+    }
   });
 
   const backgroundColors = [
@@ -97,11 +104,18 @@ export const StickyScroll = ({
         </div>
         <div
           className={cn(
-            "sticky top-50 hidden h-60 w-80 overflow-hidden lg:block",
+            "sticky top-50 hidden h-60 w-80 lg:block",
             contentClassName,
           )}
         >
-          {content[activeCard].content ?? null}
+          {activeCard >= 0 && (
+            <div 
+              key={`project-${activeCard}`}
+              className={`overflow-hidden rounded-md h-full w-full ${animatingCard === activeCard ? 'animate-zoom-out' : 'opacity-0 scale-125'}`}
+            >
+              {content[activeCard].content ?? null}
+            </div>
+          )}
         </div>
       </div>
     </motion.div>

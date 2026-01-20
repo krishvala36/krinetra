@@ -16,7 +16,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="hero relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Particles Background */}
       <div className="absolute inset-0 z-0">
         <Particles
@@ -65,7 +65,7 @@ export default function HeroSection() {
             }`}
           >
             {/* Main Headline with BlurText Animation */}
-            <div className="text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 leading-tight">
+            <h1 className="text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 leading-tight">
               <BlurText
                 text="Websites &"
                 className="text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900"
@@ -84,7 +84,7 @@ export default function HeroSection() {
                 threshold={0.1}
                 stepDuration={0.4}
               />
-            </div>
+            </h1>
 
             {/* Contact Info */}
             <div className="space-y-2">

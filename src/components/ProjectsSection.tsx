@@ -7,23 +7,35 @@ import { StickyScroll } from './ui/sticky-scroll-reveal';
 
 export default function ProjectsSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImgSrc, setModalImgSrc] = useState('');
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  const openModal = (src: string) => {
+    setModalImgSrc(src);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   const projects = [
     {
       title: 'Abhigyan Gurukul website & app',
       description: 'A comprehensive educational platform featuring responsive web design and mobile app development. We delivered end-to-end solutions including UI/UX design, backend development, and seamless integration across all devices, creating an intuitive learning experience for students and educators.',
       content: (
-        <div className="flex h-full w-full items-center justify-center rounded-md overflow-hidden">
+        <div className="gallery flex h-full w-full items-center justify-center rounded-md overflow-hidden cursor-pointer">
           <Image
             src="/p-img-1.png"
             width={500}
             height={500}
             className="h-full w-full object-contain"
             alt="Critly project"
+            onClick={() => openModal('/p-img-1.png')}
           />
         </div>
       ),
@@ -32,13 +44,14 @@ export default function ProjectsSection() {
       title: 'Muktivatm',
       description: 'An elegant insurance platform combining stunning web design with robust functionality. Our services included web development and simplifies insurance buying across all devices',
       content: (
-        <div className="flex h-full w-full items-center justify-center rounded-md overflow-hidden">
+        <div className="gallery flex h-full w-full items-center justify-center rounded-md overflow-hidden cursor-pointer">
           <Image
             src="/p-img-2.png"
             width={500}
             height={500}
             className="h-full w-full object-contain"
             alt="Tenato project"
+            onClick={() => openModal('/p-img-2.png')}
           />
         </div>
       ),
@@ -47,13 +60,14 @@ export default function ProjectsSection() {
       title: 'MAK Watches website', 
       description: 'A premium e-commerce solution for luxury watches featuring sophisticated web design and branding. We provided complete e-commerce integration, and custom backend solutions to create an elegant online shopping experience that reflects the brand\'s prestige.',
       content: (
-        <div className="flex h-full w-full items-center justify-center rounded-md overflow-hidden">
+        <div className="gallery flex h-full w-full items-center justify-center rounded-md overflow-hidden cursor-pointer">
           <Image
             src="/p-img-3.png"
             width={500}
             height={500}
             className="h-full w-full object-contain"
             alt="Santa project"
+            onClick={() => openModal('/p-img-3.png')}
           />
         </div>
       ),
@@ -62,13 +76,14 @@ export default function ProjectsSection() {
       title: 'Digital Maintenance & Support',
       description: 'Ongoing technical excellence through our comprehensive maintenance and support services. We provide continuous monitoring, updates, bug fixes, performance optimization, and 24/7 support to ensure your web and mobile applications run smoothly and stay up-to-date with the latest technologies.',
       content: (
-        <div className="flex h-full w-full items-center justify-center rounded-md overflow-hidden">
+        <div className="gallery flex h-full w-full items-center justify-center rounded-md overflow-hidden cursor-pointer">
           <Image
             src="/p-img-4.png"
             width={500}
             height={500}
             className="h-full w-full object-contain"
             alt="Crint project"
+            onClick={() => openModal('/p-img-4.png')}
           />
         </div>
       ),
@@ -107,6 +122,21 @@ export default function ProjectsSection() {
           <StickyScroll content={projects} contentClassName="h-96 w-96" />
         </div>
       </div>
+
+      {/* Image Modal */}
+      {modalOpen && (
+        <div className="img-modal" id="imgModal" style={{ display: 'flex' }}>
+          <span className="close" onClick={closeModal}>&times;</span>
+          <Image
+            id="modalImg"
+            src={modalImgSrc}
+            alt="Project preview"
+            width={1920}
+            height={1080}
+            className="max-w-[90%] max-h-[90%] rounded-lg object-contain"
+          />
+        </div>
+      )}
     </section>
   );
 }
