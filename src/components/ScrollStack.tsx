@@ -139,17 +139,17 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
       <div ref={sectionRef} className={`relative ${className}`} style={{ height: `${sectionHeightMultiplier * 100}vh` }}>
         <div className={`sticky top-0.5 w-full h-screen flex items-center justify-center overflow-hidden ${backgroundColor}`}>
-          <div className="container px-6 lg:px-8 mx-auto h-full flex flex-row items-center justify-center gap-6">
+          <div className="container px-4 sm:px-6 lg:px-8 mx-auto h-full flex flex-col md:flex-row items-center md:justify-center justify-start gap-4 md:gap-6 pt-24 pb-6 md:pt-0 md:pb-0">
 
-            {/* Left sticky image */}
-            <div className="w-1/2 h-[70vh] flex items-center justify-center">
-              <div className="w-full h-full rounded-3xl overflow-hidden shadow-lg">
-                <img src="/s-img.png" alt="Decor" className="w-full h-full object-cover" />
+            {/* Left sticky image - Below cards on mobile, left side on desktop */}
+            <div className="w-full md:w-1/2 h-[32vh] md:h-[70vh] flex items-end md:items-center justify-center order-2 md:order-1 px-2 md:px-0 pb-0 md:pb-2">
+              <div className="w-full max-w-full h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-xl" style={{ backgroundColor: '#f5f5f5' }}>
+                <img src="/s-img.png" alt="Decor" className="w-full h-full object-cover object-center" />
               </div>
             </div>
 
-            {/* Right stacked cards */}
-            <div className="relative w-1/2 h-[70vh] flex items-center">
+            {/* Right stacked cards - Above image on mobile, right side on desktop */}
+            <div className="relative w-full md:w-1/2 h-[45vh] md:h-[70vh] flex items-start md:items-center px-2 md:px-0 order-1 md:order-2">
               <div ref={cardsContainerRef} className="relative w-full max-w-2xl mx-auto shrink-0" style={{ height: cardHeight }}>
                 {cards.map((card, index) => {
                   const cardTransform = getCardTransform(index);
@@ -182,8 +182,8 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
                         {card.content ? (
                           card.content
                         ) : (
-                          <div className="max-w-md ml-auto text-right">
-                            <div className="flex items-center justify-end gap-3 mb-4">
+                          <div className="max-w-md ml-0 md:ml-auto text-left md:text-right w-full">
+                            <div className="flex items-center justify-start md:justify-end gap-3 mb-4">
                               <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">{card.title}</h3>
                               {/* @ts-ignore */}
                               {(card as any).icon && (
@@ -206,7 +206,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
                               </ul>
                             )}
 
-                            <div className="text-right">
+                            <div className="text-left md:text-right">
                               <a href="#contact">
                                 <button className="px-4 py-2 rounded-md bg-linear-to-b from-blue-500 to-blue-700 text-white font-semibold">
                                   Get Service

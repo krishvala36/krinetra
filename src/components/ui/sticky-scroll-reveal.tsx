@@ -17,12 +17,46 @@ export const StickyScroll = ({
 }) => {
   const [activeCard, setActiveCard] = React.useState(-1);
   const [animatingCard, setAnimatingCard] = useState<number | null>(null);
+  const [visibleImages, setVisibleImages] = useState<Set<number>>(new Set());
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
   const ref = useRef<any>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
   const cardLength = content.length;
+
+  // IntersectionObserver for mobile images
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    
+    imageRefs.current.forEach((imgRef, index) => {
+      if (imgRef) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                setVisibleImages((prev) => new Set(prev).add(index));
+              } else {
+                setVisibleImages((prev) => {
+                  const newSet = new Set(prev);
+                  newSet.delete(index);
+                  return newSet;
+                });
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+        observer.observe(imgRef);
+        observers.push(observer);
+      }
+    });
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const cardsBreakpoints = content.map((_, index) => index / cardLength);
@@ -70,10 +104,10 @@ export const StickyScroll = ({
       ref={ref}
     >
       <div className="flex justify-center space-x-10">
-        <div className="div relative flex items-start px-4">
-          <div className="max-w-2xl space-y-160">
+        <div className="div relative flex items-start px-4 lg:px-4">
+          <div className="max-w-2xl space-y-12 lg:space-y-160">
             {content.map((item, index) => (
-              <div key={item.title + index} className="min-h-120 flex flex-col justify-center">
+              <div key={item.title + index} className="min-h-60 lg:min-h-120 flex flex-col text-center lg:text-left items-center lg:items-start mx-auto lg:mx-0">
                 <motion.h2
                   initial={{
                     opacity: 0,
@@ -81,7 +115,7 @@ export const StickyScroll = ({
                   animate={{ 
                     opacity: activeCard === index ? 1 : 0.5,
                   }}
-                  className="text-2xl font-bold"
+                  className="text-2xl font-bold w-full"
                   style={{ color: '#C38F2F' }}
                 >
                   {item.title}
@@ -93,11 +127,18 @@ export const StickyScroll = ({
                   animate={{
                     opacity: activeCard === index ? 1 : 0.7,
                   }}
-                  className="text-kg mt-10 max-w-sm"
+                  className="text-kg mt-3 lg:mt-10 max-w-sm w-full"
                   style={{ color: '#01435F' }}
                 >
                   {item.description}
                 </motion.p>
+                {/* Mobile Image - Show below text on mobile */}
+                <div 
+                  ref={(el) => { imageRefs.current[index] = el; }}
+                  className={`lg:hidden mt-4 w-full h-48 rounded-md overflow-hidden ${visibleImages.has(index) ? 'animate-zoom-out' : 'opacity-0 scale-125'}`}
+                >
+                  {item.content}
+                </div>
               </div>
             ))}
           </div>
@@ -111,7 +152,7 @@ export const StickyScroll = ({
           {activeCard >= 0 && (
             <div 
               key={`project-${activeCard}`}
-              className={`overflow-hidden rounded-md h-full w-full ${animatingCard === activeCard ? 'animate-zoom-out' : 'opacity-0 scale-125'}`}
+              className="overflow-hidden rounded-md h-full w-full animate-zoom-out opacity-100"
             >
               {content[activeCard].content ?? null}
             </div>
