@@ -23,6 +23,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check if environment variables are set
+    if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+      console.error('Gmail credentials not configured in environment variables');
+      return NextResponse.json(
+        { error: 'Email service not configured. Please contact the administrator.' },
+        { status: 500 }
+      );
+    }
+
     // Create nodemailer transporter for Gmail
     const transporter = nodemailer.createTransport({
       service: 'gmail',
